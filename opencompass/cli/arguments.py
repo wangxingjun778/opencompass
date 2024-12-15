@@ -45,7 +45,7 @@ class Arguments:
     summarizer: str = None
     tokenizer_kwargs: Optional[dict] = field(default_factory=dict)
     tokenizer_path: str = None
-    work_dir: str = 'outputs/default'
+    work_dir: str = './outputs'
     dump_extract_rate: bool = False
     time_str: Optional[str] = None
 
