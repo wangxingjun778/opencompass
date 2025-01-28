@@ -18,7 +18,7 @@ math_infer_cfg = dict(
             # dict(role='HUMAN', prompt='Problem:\nIf the system of equations: \\begin{{align*}} 6x-4y&=a,\\\\ 6y-9x &=b. \end{{align*}}has a solution $(x, y)$ where $x$ and $y$ are both nonzero, find $\\frac{{a}}{{b}},$ assuming $b$ is nonzero.\nSolution:'),
             # dict(role='BOT', prompt='If we multiply the first equation by $-\\frac{{3}}{{2}}$, we obtain $$6y-9x=-\\frac{{3}}{{2}}a.$$Since we also know that $6y-9x=b$, we have $$-\\frac{{3}}{{2}}a=b\Rightarrow\\frac{{a}}{{b}}=\\boxed{{-\\frac{{2}}{{3}}}}.$$\nFinal Answer: The final answer is $-\\frac{{2}}{{3}}$. I hope it is correct.\n'),
             # dict(role='HUMAN', prompt='Problem:\n{problem}\nSolution:\n'),
-            dict(role='HUMAN', prompt='{problem}\nPlease reason step by step, and put your final answer within \boxed{}.'),
+            dict(role='HUMAN', prompt='{problem}\nPlease reason step by step, and put your final answer within \\boxed{}.'),
         ])),
     retriever=dict(type=ZeroRetriever),
     inferencer=dict(type=GenInferencer, max_out_len=8192))  # Note: modify max_out_len to 8192
