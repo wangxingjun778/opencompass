@@ -23,8 +23,8 @@ class Arguments:
     hf_path: str = None
     hf_type: str = 'chat'
     lark: bool = False
-    max_num_workers: int = 1
-    max_out_len: int = 256
+    max_num_workers: int = 8
+    max_out_len: int = 1024
     max_seq_len: int = None
     max_workers_per_gpu: int = 1
     min_out_len: int = 1
