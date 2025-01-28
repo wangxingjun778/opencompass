@@ -21,7 +21,7 @@ math_infer_cfg = dict(
             dict(role='HUMAN', prompt='{problem}\nPlease reason step by step, and put your final answer within \\boxed{{}}.'),
         ])),
     retriever=dict(type=ZeroRetriever),
-    inferencer=dict(type=GenInferencer, max_out_len=32768))  # Note: modify max_out_len to 32768
+    inferencer=dict(type=GenInferencer, max_out_len=8192))  # Note: modify max_out_len to 8192
 
 math_eval_cfg = dict(
     evaluator=dict(type=MATHEvaluator, version='v2'), pred_postprocessor=dict(type=math_postprocess_v2))
