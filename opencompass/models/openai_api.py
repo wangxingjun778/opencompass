@@ -198,8 +198,6 @@ class OpenAI(BaseAPIModel):
         """
         assert isinstance(input, (str, PromptList))
 
-        print(f'>>input: {input}, \n>>in max_out_len: {max_out_len}, \n>>in temperature: {temperature}')
-
         # max num token for gpt-3.5-turbo is 4097
         # Most models' token limits are above 32k
         context_window = 32768
@@ -240,10 +238,6 @@ class OpenAI(BaseAPIModel):
             max_out_len, context_window - self.get_token_len(str(input)) - 100)
         if max_out_len <= 0:
             return ''
-
-        print(f'>>messages: {messages}, \n>>updated max_out_len: {max_out_len}')
-        self.retry = 1  # todo
-
         max_num_retries = 0
         while max_num_retries < self.retry:
             self.wait()
@@ -288,9 +282,6 @@ class OpenAI(BaseAPIModel):
                         stop=None,
                         temperature=temperature,
                     )
-
-                    print(f'>>data: {data}')
-
                 else:
                     # TODO: This is a temporary solution for non-chat models.
                     input_prompts = []
@@ -308,23 +299,15 @@ class OpenAI(BaseAPIModel):
                     return {k: v for k, v in input_d.items() if v is not None}
                 data = remove_none_val(data)
 
-                print(f'>>data for remove_none_val: {data}')
-
                 raw_response = requests.post(self.url,
                                              headers=header,
                                              data=json.dumps(data))
-
-                print(f'>>raw_response content: {raw_response.content}')
-                print(f'>>raw_response text: {raw_response.text}')
 
             except requests.ConnectionError:
                 self.logger.error('Got connection error, retrying...')
                 continue
             try:
                 response = raw_response.json()
-
-                print(f'>>resp json: {response}')
-
             except requests.JSONDecodeError:
                 self.logger.error('JsonDecode error, got',
                                   str(raw_response.content))
