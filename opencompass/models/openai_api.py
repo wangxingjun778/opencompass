@@ -238,7 +238,6 @@ class OpenAI(BaseAPIModel):
             max_out_len, context_window - self.get_token_len(str(input)) - 100)
         if max_out_len <= 0:
             return ''
-
         max_num_retries = 0
         while max_num_retries < self.retry:
             self.wait()
